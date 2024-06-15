@@ -20,10 +20,11 @@ jobs:
           java-version: '21'
 
       - name: Build with Maven
+        run: ./mvnw clean install -DskipTests
+
+      - name: Test with Maven
         run: ./mvnw test
 
-      - name: Build with Maven
-        run: ./mvnw clean install -DskipTests
 
       - name: Build Docker image
         run: docker build  -t ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:0.0.4 .
