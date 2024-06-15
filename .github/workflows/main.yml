@@ -20,7 +20,7 @@ jobs:
           java-version: '21'
 
       - name: Build with Maven
-        run: ./mvnw clean install -DskipTests
+        run: ./mvnw test
 
       - name: Build with Maven
         run: ./mvnw clean install -DskipTests
