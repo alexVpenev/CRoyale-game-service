@@ -31,7 +31,7 @@ spec:
   externalIPs:
       - 18.156.82.236
   selector:
-    app: cr-game-service
+    app: cr-game-depl
   ports:
     - protocol: TCP
       port: 80
