@@ -22,13 +22,13 @@ jobs:
       - name: Build with Maven
         run: ./mvnw clean install
 
-    Docker:
-      needs: Build
-      runs-on: self-hosted
+  Docker:
+    needs: Build
+    runs-on: self-hosted
 
-      steps:
-        - name: Check out the repository
-          uses: actions/checkout@v2
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
 
-        - name: Build Docker image
-          run: docker build  -t test-spring-build .
+      - name: Build Docker image
+        run: docker build  -t test-spring-build .
