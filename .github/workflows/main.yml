@@ -31,6 +31,9 @@ jobs:
       - name: Test with Maven
         run: ./mvnw test
 
+      - name: Sonar coverage
+        run: ./mvnw sonar:sonar -Pcoverage
+
 
       - name: Build Docker image
         run: docker build  -t ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:0.0.4 .
