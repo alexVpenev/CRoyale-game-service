@@ -17,18 +17,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class GameServiceTest {
-    @InjectMocks
+//    @InjectMocks
     @Autowired
     private GameService gameService;
 
-    @Mock
-    private ExampleService exampleService;
+//    @Mock
+//    private ExampleService exampleService;
 
     @Test
     public void testAdd() {
-        when(exampleService.getOne()).thenReturn(2);
+//        when(exampleService.getOne()).thenReturn(2);
 
-        int result = gameService.add(exampleService.getOne(),1);
-        assertEquals(3, result);
+        int result = gameService.add(1,1);
+        assertEquals(2, result);
     }
 }
