@@ -23,7 +23,7 @@ jobs:
         run: ./mvnw clean install -DskipTests
 
       - name: Build Docker image
-        run: docker build  -t ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:{{ secrets.VERSION_TAG }} .
+        run: docker build  -t ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:latest .
 
       - name: Push Docker image to DockerHub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:latest .
