@@ -11,7 +11,7 @@ public class GameServiceApplication {
 
 	@GetMapping({"/"})
 	public String helloWorld() {
-		return "CRoyale Game Service - NEWEST VERSION!!!";
+		return "CRoyale Game Service - Version 0.0.2!!!";
 	}
 
 	public static void main(String[] args) {
