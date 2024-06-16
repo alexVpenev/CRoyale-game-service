@@ -42,6 +42,7 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:0.0.4
 
   Sonar:
+    runs-on: self-hosted
     steps:
       - name: Check out the repository
         uses: actions/checkout@v2
