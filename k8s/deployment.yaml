@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cr-game-depl
-  namespace: green
+#  namespace: blue
 spec:
   replicas: 1
   selector:
@@ -39,13 +39,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cr-game-service
-  namespace: green
+  namespace: blue
   labels:
     app: cr-game-service
 spec:
   type: LoadBalancer
   externalIPs:
-    - 18.156.82.236
+      - 18.156.82.236
   selector:
     app: cr-game-depl
   ports:
