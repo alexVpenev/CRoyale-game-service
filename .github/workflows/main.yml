@@ -68,11 +68,13 @@ jobs:
         run: ./mvnw clean install -DskipTests
 
       - name: Build Docker image
-        run: docker build  -t ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:0.0.5 .
+        run: docker build  -t ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:latest .
 
       - name: Push Docker image to DockerHub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:0.0.5
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:latest
 
       - name: Deploy Game Service to Blue Environment
-        run: kubectl apply -f k8s/deployment.yaml -n blue
+        run: |
+          kubectl delete -f k8s/deployment.yaml -n blue
+          kubectl apply -f k8s/deployment.yaml -n blue
 

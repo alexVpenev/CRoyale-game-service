@@ -15,7 +15,7 @@ public class GameController {
 
     @GetMapping({"/"})
     public String helloWorld() {
-        return "CRoyale Game Service - Version 0.0.3 - SONARCLOUD!!!";
+        return "CRoyale Game Service - Nachi sq tva e pulniq tashak";
     }
 
     @GetMapping({"/game"})
