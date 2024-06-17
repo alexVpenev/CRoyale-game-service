@@ -1,0 +1,8 @@
+name: Switch to Green Development
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Switch:
+    runs-on: self-hosted

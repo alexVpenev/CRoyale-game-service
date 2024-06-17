@@ -73,7 +73,7 @@ jobs:
       - name: Push Docker image to DockerHub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:latest
 
-      - name: Deploy Game Service to Blue Environment
+      - name: Deploy Game Service to Green Environment
         run: |
           kubectl delete -f k8s/deployment.yaml -n green
           kubectl apply -f k8s/deployment.yaml -n green
