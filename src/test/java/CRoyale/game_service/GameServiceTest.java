@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class GameServiceTest {
+class GameServiceTest {
 //    @InjectMocks
     @Autowired
     private GameService gameService;
@@ -25,7 +25,7 @@ public class GameServiceTest {
 //    private ExampleService exampleService;
 
     @Test
-    public void testAdd() {
+    void testAdd() {
 //        when(exampleService.getOne()).thenReturn(2);
 
         int result = gameService.add(1,1);

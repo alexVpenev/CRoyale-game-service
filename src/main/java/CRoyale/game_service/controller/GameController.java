@@ -15,7 +15,7 @@ public class GameController {
 
     @GetMapping({"/"})
     public String helloWorld() {
-        return "CRoyale Game Service - Green Deployment!";
+        return "CRoyale Game Service - Testing from Green to Blue";
     }
 
     @GetMapping({"/game"})
