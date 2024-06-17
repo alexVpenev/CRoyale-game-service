@@ -1,0 +1,80 @@
+name: Green Workflow
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  Build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '21'
+
+      - name: Build with Maven
+        run: ./mvnw clean install -DskipTests
+
+  Test:
+    runs-on: self-hosted
+    needs: Build
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '21'
+
+      - name: Set environment variables
+        run: |
+          echo "DB_URL=${{ secrets.DB_URL }}" >> $GITHUB_ENV
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+
+      - name: Run Unit Tests
+        run: ./mvnw test
+
+      - name: Analyze with Sonar
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CRoyale-Game-Service -Dsonar.projectName='CRoyale-Game-Service'
+
+  Deploy:
+    runs-on: self-hosted
+    needs: Test
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '21'
+
+      - name: Build with Maven
+        run: ./mvnw clean install -DskipTests
+
+      - name: Build Docker image
+        run: docker build  -t ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:latest .
+
+      - name: Push Docker image to DockerHub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/croyale-game-service:latest
+
+      - name: Deploy Game Service to Blue Environment
+        run: |
+          kubectl delete -f k8s/deployment.yaml -n green
+          kubectl apply -f k8s/deployment.yaml -n green
+
