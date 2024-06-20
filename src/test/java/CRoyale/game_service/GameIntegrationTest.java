@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GameIntegrationTest {
+class GameIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -23,7 +23,7 @@ public class GameIntegrationTest {
     private IGameRepository gameRepository;
 
     @Test
-    public void testSaveGame() throws Exception {
+    void testSaveGame() throws Exception {
         String gameJson = "{\"id\": 123," +
                 " \"name\": \"Test Game\"}";
 
