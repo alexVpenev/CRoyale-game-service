@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: cr-game-depl
-          image: alexupenev/croyale-game-service:latest
+          image: alexupenev/croyale-game-service:0.0.2
           ports:
             - containerPort: 80
           env:
